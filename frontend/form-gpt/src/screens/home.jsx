@@ -15,7 +15,24 @@ function Home({documents, setDocuments}) {
     setDocuments(prev => [...prev, ...files]);
 
     event.target.value = null;
+
   };
+  const uploadDocument = async () => {
+
+  const response = await fetch("http://127.0.0.1:5000/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: "document upload triggered"
+    })
+  });
+
+  const data = await response.json();
+
+  console.log(data);
+};
 
   
   return (
@@ -31,6 +48,9 @@ function Home({documents, setDocuments}) {
           width="150"
         />
       ))}
+        <button onClick={uploadDocument}>
+          Upload Document
+        </button>
       
     </>
   )
