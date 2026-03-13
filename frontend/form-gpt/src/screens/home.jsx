@@ -19,20 +19,21 @@ function Home({documents, setDocuments}) {
   };
   const uploadDocument = async () => {
 
-  const response = await fetch("http://127.0.0.1:5000/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: "document upload triggered"
-    })
-  });
+    const formData = new FormData();
 
-  const data = await response.json();
+    documents.forEach((doc) => {
+      formData.append("files", doc);
+    });
 
-  console.log(data);
-};
+    const response = await fetch("http://127.0.0.1:5000/", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+  };
 
   
   return (

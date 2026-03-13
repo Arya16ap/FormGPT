@@ -8,11 +8,13 @@ CORS(app)
 def receive_document():
 
     if request.method == "POST":
-        data = request.json
-        print("Received:", data)
-        return jsonify({"message": "hello there"})
+        files = request.files.getlist("files")
 
-    return "Server running"
+    filenames = [file.filename for file in files]
+
+    print("Received:", filenames)
+
+    return {"files": filenames}
 
 if __name__ == "__main__":
     app.run(debug=True)
