@@ -52,7 +52,7 @@ function Home({documents, setDocuments}) {
         <button onClick={uploadDocument}>
           Upload Document
         </button>
-      
+      <p>Arya Love You</p>
     </>
   )
 }
